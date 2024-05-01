@@ -37,6 +37,37 @@
 
         <!--  END CUSTOM STYLE FILE  -->
 
+        <link href="../layouts/horizontal-light-menu/css/light/loader.css" rel="stylesheet" type="text/css" />
+        <link href="../layouts/horizontal-light-menu/css/dark/loader.css" rel="stylesheet" type="text/css" />
+        <script src="../layouts/horizontal-light-menu/loader.js"></script>
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+        <link href="../src/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../layouts/horizontal-light-menu/css/light/plugins.css" rel="stylesheet" type="text/css" />
+        <link href="../layouts/horizontal-light-menu/css/dark/plugins.css" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STY LES -->
+
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <link href="../src/plugins/src/animate/animate.css" rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL PLUGINS -->
+
+        <!--  BEGIN CUSTOM STYLE FILE  -->
+        <link href="../src/assets/css/light/scrollspyNav.css" rel="stylesheet" type="text/css" />
+        <link href="../src/assets/css/light/components/carousel.css" rel="stylesheet" type="text/css">
+        <link href="../src/assets/css/light/components/modal.css" rel="stylesheet" type="text/css" />
+        <link href="../src/assets/css/light/components/tabs.css" rel="stylesheet" type="text/css">
+
+        <link href="../src/assets/css/dark/scrollspyNav.css" rel="stylesheet" type="text/css" />
+        <link href="../src/assets/css/dark/components/carousel.css" rel="stylesheet" type="text/css">
+        <link href="../src/assets/css/dark/components/modal.css" rel="stylesheet" type="text/css" />
+        <link href="../src/assets/css/dark/components/tabs.css" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="../src/plugins/src/filepond/filepond.min.css">
+        <link rel="stylesheet" href="../src/plugins/src/filepond/FilePondPluginImagePreview.min.css">
+        <link href="../src/plugins/css/light/filepond/custom-filepond.css" rel="stylesheet" type="text/css" />
+        <link href="../src/plugins/css/dark/filepond/custom-filepond.css" rel="stylesheet" type="text/css" />
+        <!--  END CUSTOM STYLE FILE  -->
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -50,7 +81,16 @@
         @livewireStyles
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <!-- BEGIN LOADER -->
+            <div id="load_screen">
+                <div class="loader">
+                    <div class="loader-content">
+                        <div class="spinner-grow align-self-center"></div>
+                    </div>
+                </div>
+            </div>
+            <!--  END LOADER -->
+        <div class="font-sans antialiased text-gray-900">
             {{ $slot }}
         </div>
 

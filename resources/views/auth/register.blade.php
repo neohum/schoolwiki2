@@ -6,40 +6,49 @@
 
         <x-validation-errors class="mb-4" />
 
+        <div class="mt-4">
+            <x-label for="name" value="{{ __('학교명(학교명을 입력 후 학교 검색 버튼을 눌러주세요.)') }}" />
+            <x-input class="block w-full mt-1" type="text" id="schoolSearch" name="schoolSearch"  required autofocus/>
+
+        </div>
+        <div class="mt-4">
+            <x-button class="ms-4" id="schoolBtn" name="schoolBtn">
+                {{ __('1. 학교 검색') }}
+            </x-button>
+        </div>
+
+        <div class="mt-4" class="schoolsearch12" id="schoolsearch12">
+        </div>
+
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div>
-                <x-label for="name" value="{{ __('학교명') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" disabled/>
-                <br>
-                <x-label for="name" value="{{ __('학교번호') }}" />
-                <x-input id="school_num" class="block mt-1 w-full" type="text" name="school_num" :value="old('school_num')" required autofocus autocomplete="name" disabled/>
-                <div class="mb-4">
-                    <br>
+            <div class="mt-4">
+                <x-label for="name" value="{{ __('학교명(이 학교명은 수정하지 마세요.)') }}" />
+                <x-input class="block w-full mt-1" type="text" name="name" id="name" :value="old('name')" required  onclick="getCheck()"/>
 
-                    <!-- Form Button trigger modal -->
-                    <button type="button" class="btn btn-dark mb-2 me-4" data-bs-toggle="modal" data-bs-target="#inputFormModal">
-                        학교명 검색
-                    </button>
-
-
-                 </div>
             </div>
 
             <div class="mt-4">
-                <x-label for="email" value="{{ __('이메일') }}" />(네이트 이메일 등 공동으로 사용할 수 있는 이메일)
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <x-label for="code" value="{{ __('학교 코드(이 학교 코드는 수정하지 마세요.)') }}" />
+                <x-input class="block w-full mt-1" type="text" name="code" id="code" :value="old('code')"  required  />
+
+            </div>
+
+            <div class="mt-4">
+                <x-label for="email" value="{{ __('이메일') }}" />
+                <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('비밀번호') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-input id="password" class="block w-full mt-1" type="password" name="password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('비밀번호 확인') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <x-input id="password_confirmation" class="block w-full mt-1" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -50,8 +59,8 @@
 
                             <div class="ms-2">
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
+                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
+                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
                                 ]) !!}
                             </div>
                         </div>
@@ -60,12 +69,12 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                     {{ __('이미 가입하셨다면 로그인으로 이동') }}
                 </a>
 
                 <x-button class="ms-4">
-                    {{ __('가입하기') }}
+                    {{ __('3. 가입하기') }}
                 </x-button>
             </div>
         </form>
@@ -88,7 +97,7 @@
                     <div class="modal-body">
                         <form class="mt-0">
                             <div class="form-group">
-                                <div class="input-group mb-3">
+                                <div class="mb-3 input-group">
                                     <span class="input-group-text">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail"
                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -108,9 +117,9 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-light-danger mt-2 mb-2 btn-no-effect"
+                        <button type="submit" class="mt-2 mb-2 btn btn-light-danger btn-no-effect"
                             data-bs-dismiss="modal">취소</button>
-                        <button type="submit" class="btn btn-primary mt-2 mb-2 btn-no-effect" data-bs-dismiss="modal">학교 찾기
+                        <button type="submit" class="mt-2 mb-2 btn btn-primary btn-no-effect" data-bs-dismiss="modal">학교 찾기
                             i</button>
                     </div>
                 </div>
@@ -121,3 +130,4 @@
 
 
 </x-guest-layout>
+
